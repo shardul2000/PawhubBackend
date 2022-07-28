@@ -11,9 +11,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 4000;
 const { User } = require('./models/userSchema');
 
-
-
-//connect to mongodb atlas
+//connect to mongodb 
 connect();
 
 //route to appropriate folders
