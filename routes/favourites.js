@@ -1,7 +1,6 @@
 //Sarah: initializing controllers and needed functions
 const express = require("express");
 const router = express.Router();
-const { middleware } = require("../middleware/private");
 const{  addFavourite, getFavourites, deleteFavourite, getListingDataById, checkFavourite} = require("../controllers/favourites")
 
 //Sarah: creating router for fetching, middleware checks token
