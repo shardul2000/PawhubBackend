@@ -15,7 +15,7 @@ const {
 } = require('../controllers/market');
 
 //middleware will check jwt token for every request
-router.post('/makeListing', middleware, makeListing);
+router.post('/makeListing', makeListing);
 router.get('/getAllListings', getAllListings);
 router.get('/getListing/:id', getListing);
 router.get('/getListingByLocation/:location', getListingByLocation);
