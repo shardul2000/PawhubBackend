@@ -1,15 +1,16 @@
 const mongoose = require("mongoose");
 
-const messageSchema = new mongoose.Schema({
-    conversationId: {
+const conversationsSchema = new mongoose.Schema({
+  
+    senderId: {
         type: String,
         required:true
     },
-    sender: {
+    receiverId: {
         type: String,
         required:true
     },
-    image: {
+    text: {
         type:String,
         required: true
     },
@@ -18,4 +19,4 @@ const messageSchema = new mongoose.Schema({
     timestamps: true
 });
 
-exports.Post = mongoose.model("message",messageSchema);
+exports.Conversations = mongoose.model("conversations",conversationsSchema);
