@@ -1,7 +1,7 @@
 
 const { Conversations } = require("../models/conversationsSchema")
 
-const sendMessage = async(req, res, next) => {
+const startConversation = async(req, res, next) => {
 
     const data = req.body;
 
@@ -13,26 +13,21 @@ const sendMessage = async(req, res, next) => {
         response:result._id
         })
     }catch(e){
-        res.status(500).send(json(
+        res.status(500).json(
             {success:false}
-        ))
+        )
     }
 }
 
-const getMessages = async(req,res,next) => {
+const getConversations = async(req,res,next) => {
     const userId = req.params.userId
     try{
         const conversations = await Conversations.find({
             $or:[
-                {
-                    senderId:userId
-                },
-                {
-                    receiverId:userId
-                }
+                {member1:userId},
+                {member2:userId}
             ]
         })
-
         res.status(200).json({
             success:true,
             conversations:conversations
@@ -48,5 +43,5 @@ const getMessages = async(req,res,next) => {
 
 
 module.exports = {
-    sendMessage, getMessages
+    startConversation, getConversations
 }

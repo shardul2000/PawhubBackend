@@ -2,18 +2,14 @@ const mongoose = require("mongoose");
 
 const conversationsSchema = new mongoose.Schema({
   
-    senderId: {
+    member1: {
         type: String,
         required:true
     },
-    receiverId: {
+    member2: {
         type: String,
         required:true
-    },
-    text: {
-        type:String,
-        required: true
-    },
+    }
 },
 {
     timestamps: true

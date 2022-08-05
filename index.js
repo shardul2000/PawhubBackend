@@ -28,6 +28,7 @@ app.use('/api/report', require('./routes/report'));
 // route to follow folder:
 app.use('/api/follow', require('./routes/follow'));
 app.use('/api/conversations', require('./routes/conversations'));
+app.use('/api/texts', require('./routes/texts'));
 
 app.get('/', (req, res) => {
 	res.send('Welcome!');

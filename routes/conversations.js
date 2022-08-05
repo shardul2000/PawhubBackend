@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const{ sendMessage, getMessages } = require("../controllers/conversations")
+const{ startConversation, getConversations } = require("../controllers/conversations")
 
-router.post("/sendMessage", sendMessage);
-router.get("/getMessages/:userId", getMessages);
+router.post("/startConversation", startConversation);
+router.get("/getConversations/:userId", getConversations);
 
 module.exports= router;
