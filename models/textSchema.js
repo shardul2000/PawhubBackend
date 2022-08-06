@@ -17,4 +17,4 @@ const textSchema = new mongoose.Schema({
 });
 
 //exporting favorutites schema 
-exports.Text = mongoose.model("Text",textSchema);
+exports.Text = mongoose.model("texts",textSchema);
