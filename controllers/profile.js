@@ -31,6 +31,38 @@ const getData = async (req, res, next) => {
 		});
 	}
 };
+
+
+const getUserData = async (req, res, next) => {
+	const id = req.params.id;
+	try {
+		let user = await User.findById(id);
+		if (user) {
+			return res.status(200).json({
+				success: true,
+				response: {
+					firstName: user.firstName,
+					lastName:user.lastName,
+					userId: user._id
+				},
+			});
+		} else {
+			return res.status(401).json({
+				success: false,
+				response: 'User Not Found',
+			});
+		}
+	} catch (e) {
+		return res.status(500).json({
+			success: false,
+			response: 'Something went wrong',
+		});
+	}
+};
+
+
+
+
 const getFriends = async (req, res) => {
 	console.log('pls work');
 
@@ -269,4 +301,5 @@ module.exports = {
 	messageGet,
 	postReview,
 	getReviews,
+	getUserData
 };
