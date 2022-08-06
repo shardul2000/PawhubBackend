@@ -43,7 +43,8 @@ const getUserData = async (req, res, next) => {
 				response: {
 					firstName: user.firstName,
 					lastName:user.lastName,
-					userId: user._id
+					userId: user._id,
+					avatar: user.profileImage? user.profileImage:"https://gravatar.com/avatar/a76e35c4b53938456f6886920d62bf0c?s=400&d=mp&r=x"
 				},
 			});
 		} else {
