@@ -1,7 +1,6 @@
-//Sarah: referencing favourite object from schema
 const { Favourite } = require("../models/favouritesSchema");
 const {productListing}=require("../models/productListingSchema");
-//Sarah: adding to favourites based on userid and postid
+const {serviceListing}=require("../models/serviceListingSchema");
 
 
 const addFavourite = async(req, res, next) => {
@@ -83,7 +82,25 @@ const getFavourites = async(req, res, next) => {
                 success:false,
                 response:"Something went wrong. Try again later\n "+e
             });
-        });    
+        }); 
+
+        serviceListing.findOne({_id:id})
+        .then(function (listings) {
+            res.status(200).json({
+              "success":true,
+              "listings": listings
+            });
+        })
+        .catch((e)=>{
+            console.log("error: " + e);
+            res.status(500).json({
+                success:false,
+                response:"Something went wrong. Try again later\n "+e
+            });
+        }); 
+       
+      
+           
   }
 
   const checkFavourite = async(req,res) => {
