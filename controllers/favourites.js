@@ -50,11 +50,13 @@ const getFavourites = async(req, res, next) => {
       await Favourite.findOneAndDelete({
         listingId:listingId,
         clientId:clientId
-      })
-     //await Favourite.findByIdAndDelete(id)
+      });
+     const favs = await Favourite.find({clientId:clientId}) ;
+
      res.status(200).json({
        success:true,
-       response:"Favourite Deleted"
+       response:"Favourite Deleted",
+       favourites: favs
      })
     }catch(e){
      res.status(500).json({

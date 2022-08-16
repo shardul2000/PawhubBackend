@@ -78,6 +78,13 @@ const login = async(req, res) => {
 }
 
 
+const checkValid = async(req, res, next)  => {
+
+     res.status(200).json({
+          isAuthenticated: true
+     })
+}
+
 module.exports = {
-     register, login
+     register, login, checkValid
 }
