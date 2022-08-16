@@ -70,7 +70,7 @@ const getFavourites = async(req, res, next) => {
 
         const error = 0;
         let id = req.params.id;
-        productListing.findOne({_id:id})
+       await productListing.findOne({_id:id})
         .then(function (listings) {
             return res.status(200).json({
               "success":true,
@@ -82,7 +82,7 @@ const getFavourites = async(req, res, next) => {
            console.log("error: " + e);
         }); 
 
-        serviceListing.findOne({_id:id})
+        await serviceListing.findOne({_id:id})
         .then(function (listings) {
             return res.status(200).json({
               "success":true,
