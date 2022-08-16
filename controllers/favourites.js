@@ -68,36 +68,42 @@ const getFavourites = async(req, res, next) => {
  //get listing data for logged in user from post iD
  const getListingDataById = async(req, res, next) => {
 
+        const error = 0;
         let id = req.params.id;
         productListing.findOne({_id:id})
         .then(function (listings) {
-            res.status(200).json({
+            return res.status(200).json({
+              "success":true,
+              "listings": listings
+            });
+        })
+        .catch((e)=>{
+           error++;
+           console.log("error: " + e);
+        }); 
+
+        serviceListing.findOne({_id:id})
+        .then(function (listings) {
+            return res.status(200).json({
               "success":true,
               "listings": listings
             });
         })
         .catch((e)=>{
             console.log("error: " + e);
+            error++;
             res.status(500).json({
                 success:false,
                 response:"Something went wrong. Try again later\n "+e
             });
         }); 
 
-        serviceListing.findOne({_id:id})
-        .then(function (listings) {
-            res.status(200).json({
-              "success":true,
-              "listings": listings
-            });
-        })
-        .catch((e)=>{
-            console.log("error: " + e);
-            res.status(500).json({
-                success:false,
-                response:"Something went wrong. Try again later\n "+e
-            });
-        }); 
+        if(error>0){
+          res.status(500).json({
+            success:false,
+            response:"Something went wrong. Try again later\n "+e
+        });
+        }
        
       
            
