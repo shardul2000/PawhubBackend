@@ -68,45 +68,33 @@ const getFavourites = async(req, res, next) => {
  //get listing data for logged in user from post iD
  const getListingDataById = async(req, res, next) => {
 
-        const error = 0;
-        let id = req.params.id;
-       await productListing.findOne({_id:id})
-        .then(function (listings) {
-            return res.status(200).json({
-              "success":true,
-              "listings": listings
-            });
-        })
-        .catch((e)=>{
-           error++;
-           console.log("error: " + e);
-        }); 
-
-        await serviceListing.findOne({_id:id})
-        .then(function (listings) {
-            return res.status(200).json({
-              "success":true,
-              "listings": listings
-            });
-        })
-        .catch((e)=>{
-            console.log("error: " + e);
-            error++;
-            res.status(500).json({
-                success:false,
-                response:"Something went wrong. Try again later\n "+e
-            });
-        }); 
-
-        if(error>0){
-          res.status(500).json({
-            success:false,
-            response:"Something went wrong. Try again later\n "+e
-        });
+    let id = req.params.id;
+    try{
+        let result1 = await productListing.findOne({_id:id})
+        if(result1!=null){
+          return res.status(200).json({
+            "success":true,
+            "listings": result1,
+            "type":"productDetails"
+          });
         }
-       
-      
-           
+
+        let result2 = await serviceListing.findOne({_id:id})
+        if(result2!=null){
+          return res.status(200).json({
+            "success":true,
+            "listings": result2,
+            "type":"serviceDetails"
+          });
+        }
+    }catch(e){
+      return res.status(500).json({
+        "success":false,
+        "error" : e
+      });
+    }
+
+    
   }
 
   const checkFavourite = async(req,res) => {
